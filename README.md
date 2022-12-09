@@ -21,39 +21,24 @@ sysctl -w kernel.pid_max=1048575
 ```
 docker load -i 8201clab:7.5.3.tar.gz
 ```
-3. Create a simple Cisco 8000 back-to-back clab topology file: [c8201-b2b.yml](c8201-b2b.yml)
+3. Create a topology file, example: [c8201-b2b.yml](c8201-b2b.yml)
 
 
 #### NOTE: Data interfaces naming convention 
+```
 FH0_0_0_[0..N] ->  400G interfaces
-
 Hu0_0_0_[0..N] ->  100G interfaces
-
-4. Create a simple r01 and r02 config for ssh and basic ping testing.
-
-cat r01.cfg
 ```
-hostname r10
-interface FourHundredGigE 0/0/0/0
-   ipv4 addr 10.0.0.1/24
-   no shutdown
-!
-ssh server vrf default
-```
-cat r2.cfg
-```
-hostname r2
-interface FourHundredGigE 0/0/0/0
-   ipv4 addr 10.0.0.2/24
-   no shutdown
-!
-ssh server vrf default
-```
+4. Create config files: 
+  [R01](r01.cfg)
+  [R02](r02.cfg)
 
 5. Deploy topology
 ```
 containerlab deploy -t c8201-b2b.yml
-
+```
+Example terminal output:
+```
 INFO[0000] Creating container: "r1"
 INFO[0000] Creating container: "r2"
 INFO[0003] Creating virtual wire: r1:FH0_0_0_1 <--> r2:FH0_0_0_1 
