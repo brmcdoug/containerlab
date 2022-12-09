@@ -19,41 +19,21 @@ sysctl -w kernel.pid_max=1048575
 
 2. Install 8000 docker image
 ```
-docker load < 8201clab:7.5.3.tar.gz
+docker load -i 8201clab:7.5.3.tar.gz
 ```
-3. Create a simple Cisco 8000 back-to-back clab topology file
+3. Create a simple Cisco 8000 back-to-back clab topology file: c8201-b2b.yml
 
 
-cat example.yml
-```
-name: c8201
-
-topology:
-  kinds:
-    linux:
-      image: 8201clab:7.5.3
-  nodes:
-    r1:
-      kind: linux
-      binds: [r1.cfg:/startup.cfg:ro]
-    r2:
-      kind: linux
-      binds: [r2.cfg:/startup.cfg:ro]
-
-  links:
-    - endpoints: ["r1:FH0_0_0_0", "r2:FH0_0_0_0"]
-    - endpoints: ["r1:FH0_0_0_1", "r2:FH0_0_0_1"]
-```
 #### NOTE: Data interfaces naming convention 
 FH0_0_0_[0..N] ->  400G interfaces
 
 Hu0_0_0_[0..N] ->  100G interfaces
 
-4. Create a simple r1 and r2 config for ssh and basic ping testing.
+4. Create a simple r01 and r02 config for ssh and basic ping testing.
 
-cat r1.cfg
+cat r01.cfg
 ```
-hostname r1
+hostname r10
 interface FourHundredGigE 0/0/0/0
    ipv4 addr 10.0.0.1/24
    no shutdown
@@ -72,7 +52,7 @@ ssh server vrf default
 
 5. Deploy topology
 ```
-containerlab deploy -t example.yml
+containerlab deploy -t c8201-b2b.yml
 
 INFO[0000] Creating container: "r1"
 INFO[0000] Creating container: "r2"
@@ -92,7 +72,7 @@ NOTE: it takes about 6 minutes for XR to come up.
 
 6. Monitor sim bringup
 ```
-docker logs -f clab-c8201-r1
+docker logs -f clab-c8201-r01
 ...
 6:56:33 INFO Getting port files for device R0
 16:57:03 INFO R0:wait for XR login prompt (console output captured in vxr.out/logs/console.R0.log)
