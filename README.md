@@ -175,17 +175,22 @@ RP/0/RP0/CPU0:r01#
 #### Troubleshooting
 
 1. Invoke bash shell of the relevant docker instance
+```
 docker exec -ti clab-c8201-r01 bash
 root@r01:/#
-
+```
 2. Check vxr simulation status (make sure it is in ‘running’ state)
+```
 root@r01:/# cd /nobackup/
 root@r01:/nobackup# vxr.py status
 {"localhost": "running"}
+```
 
 3. If simulation not in 'running' state, invoke sim-check command
+```
 root@r01:/nobackup# vxr.py sim-check
-
+```
 Try booting image outside of Containerlab
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+```
 docker run --rm -it --privileged --env CLAB_INTFS=0 --name test 8201clab:7.5.3
+```
