@@ -155,9 +155,12 @@ Total adjacency count: 2
 RP/0/RP0/CPU0:r01#
 ```
 
-XR serial console access
-========================
+9. Destroy topology
+```
+sudo containerlab destroy -t c8201-b2b.yml 
+```
 
+#### XR serial console access
 
 1. Telnet to serial console (port 60000)
 ```
@@ -169,9 +172,7 @@ Escape character is '^]'.
 RP/0/RP0/CPU0:r01#
 ```
 
-Troubleshooting
-===============
-
+#### Troubleshooting
 
 1. Invoke bash shell of the relevant docker instance
 docker exec -ti clab-c8201-r01 bash
