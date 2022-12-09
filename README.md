@@ -1,4 +1,5 @@
 # vxr8000-containerlab
+#### Many thanks to Rafal Skorka for providing the 8000 image and original instructions
 
 ### Installing and running Cisco 8000 simulator Containerlab docker image
 
