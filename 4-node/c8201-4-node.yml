@@ -1,0 +1,31 @@
+name: c8201-4-node
+
+topology:
+  kinds:
+    linux:
+      image: 8201clab:7.5.3
+  nodes:
+    r01:
+      kind: linux
+      binds: [r01.cfg:/startup.cfg:ro]
+    r02:
+      kind: linux
+      binds: [r02.cfg:/startup.cfg:ro]
+    r03:
+      kind: linux
+      binds: [r03.cfg:/startup.cfg:ro]
+    r04:
+      kind: linux
+      binds: [r04.cfg:/startup.cfg:ro]
+
+  links:
+    - endpoints: ["r01:FH0_0_0_0", "r02:FH0_0_0_0"]
+    - endpoints: ["r01:FH0_0_0_1", "r02:FH0_0_0_1"]
+    - endpoints: ["r01:FH0_0_0_2", "r03:FH0_0_0_0"]
+    - endpoints: ["r01:FH0_0_0_3", "r03:FH0_0_0_1"]
+    - endpoints: ["r01:FH0_0_0_4", "r04:FH0_0_0_4"]
+    - endpoints: ["r01:FH0_0_0_5", "r04:FH0_0_0_5"]
+    - endpoints: ["r02:FH0_0_0_2", "r04:FH0_0_0_0"]
+    - endpoints: ["r02:FH0_0_0_3", "r04:FH0_0_0_1"]
+    - endpoints: ["r03:FH0_0_0_2", "r04:FH0_0_0_2"]
+    - endpoints: ["r03:FH0_0_0_3", "r04:FH0_0_0_3"]
