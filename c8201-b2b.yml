@@ -1,0 +1,17 @@
+name: c8201
+
+topology:
+  kinds:
+    linux:
+      image: 8201clab:7.5.3
+  nodes:
+    r1:
+      kind: linux
+      binds: [r01.cfg:/startup.cfg:ro]
+    r2:
+      kind: linux
+      binds: [r02.cfg:/startup.cfg:ro]
+
+  links:
+    - endpoints: ["r01:FH0_0_0_0", "r02:FH0_0_0_0"]
+    - endpoints: ["r01:FH0_0_0_1", "r02:FH0_0_0_1"]
