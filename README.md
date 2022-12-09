@@ -21,7 +21,7 @@ sysctl -w kernel.pid_max=1048575
 ```
 docker load -i 8201clab:7.5.3.tar.gz
 ```
-3. Create a simple Cisco 8000 back-to-back clab topology file: c8201-b2b.yml
+3. Create a simple Cisco 8000 back-to-back clab topology file: [c8201-b2b.yml](c8201-b2b.yml)
 
 
 #### NOTE: Data interfaces naming convention 
