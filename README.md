@@ -29,13 +29,11 @@ docker load -i 8201clab:7.5.3.tar.gz
 FH0_0_0_[0..N] ->  400G interfaces
 Hu0_0_0_[0..N] ->  100G interfaces
 ```
-4. Create config files: 
-  [R01](r01.cfg)
-  [R02](r02.cfg)
+4. Create config files. Examples: [R01](r01.cfg) and [R02](r02.cfg)
 
 5. Deploy topology
 ```
-containerlab deploy -t c8201-b2b.yml
+sudo containerlab deploy -t c8201-b2b.yml
 ```
 Example terminal output:
 ```

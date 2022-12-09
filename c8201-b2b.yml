@@ -5,10 +5,10 @@ topology:
     linux:
       image: 8201clab:7.5.3
   nodes:
-    r1:
+    r01:
       kind: linux
       binds: [r01.cfg:/startup.cfg:ro]
-    r2:
+    r02:
       kind: linux
       binds: [r02.cfg:/startup.cfg:ro]
 
