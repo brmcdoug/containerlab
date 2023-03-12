@@ -1,9 +1,7 @@
-## Virtualized c8000 SONiC build
-#### Many thanks to Rafal Skorka for providing the 8000 image and original instructions
-
 Installing and running Cisco 8000 SONIC Containerlab docker image
 =================================================================
 
+#### Many thanks to Rafal Skorka for providing the 8000 image and original instructions
 
 1. Host server requirements
 
@@ -18,20 +16,17 @@ Installing and running Cisco 8000 SONIC Containerlab docker image
 
 - cpu and memory: recommend 20GB and 4 cores per router
 
-
-
 2. Install 8000 SONIC docker image
 docker load < c8000-clab-sonic:19.tar.gz
 
-
 3. Copy sonic-cisco-8000.bin image to local storage (e.g. /sonic_images)
-
 
 4. Create a simple SONIC back-to-back clab topology file
 
 NOTE: we will be using 'linux' ContainerLab kind to boot sonic images
 
 cat example.yml
+```
 name: sonic
 
 topology:
@@ -53,7 +48,7 @@ topology:
   links:
     - endpoints: ["r1:eth1", "r2:eth1"]
     - endpoints: ["r1:eth2", "r2:eth2"]
-
+```
 
 #############################################
 ## NOTE: Data interfaces naming convention ##
@@ -62,18 +57,15 @@ eth1 -> first front panel port  (Ethernet0)
 eth2 -> second front panel port (Ethernet4 or Ethernet8)
 ..
 
-
 5. Deploy topology
 
 containerlab deploy -t example.yml
 
 NOTE: it may 10 or more minutes for SONIC to come up
 
-
 6. Monitor sonic device bringup
 
 docker clab-sonic-r1 logs -f
-
 
 After a while, you should see:
 
@@ -82,13 +74,11 @@ Router up
 
 If you don't see "Router up" after 10 minutes, please share the "docker logs ..." output with Cisco team.
 
-
 7. Test ssh to XR (use cisco/cisco123 login credentials)
 
 containerlab inspect -t example.yml |grep r1
 
 | 1 | clab-sonic-r1 | 1edc2ce54d66 | c8000-clab-sonic:16 | linux | running | 172.20.20.3/24 | 2001:172:20:20::2/64 |
-
 
 ssh cisco@172.20.20.3
 cisco@172.20.20.3's password: 
