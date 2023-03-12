@@ -1,0 +1,74 @@
+name: c8201-10-node-SONiC-clos
+
+topology:
+  kinds:
+    linux:
+      image: c8000-clab-sonic:19
+      binds: 
+          - /sonic_images:/images
+      env:
+          IMAGE: /opt/images/sonic-cisco-8000.bin
+          PID: '8101-32H'
+
+  nodes:
+    r00:
+      kind: linux
+      #binds: [r00.cfg:/startup.cfg:ro]
+    r01:
+      kind: linux
+      #binds: [r01.cfg:/startup.cfg:ro]
+    r02:
+      kind: linux
+      #binds: [r02.cfg:/startup.cfg:ro]
+    r03:
+      kind: linux
+      #binds: [r03.cfg:/startup.cfg:ro]
+    r04:
+      kind: linux
+      #binds: [r04.cfg:/startup.cfg:ro]
+    r05:
+      kind: linux
+      #binds: [r05.cfg:/startup.cfg:ro]
+    r06:
+      kind: linux
+      binds: [r06.cfg:/startup.cfg:ro]
+    r07:
+      kind: linux
+      #binds: [r07.cfg:/startup.cfg:ro]
+    r08:
+      kind: linux
+      #binds: [r08.cfg:/startup.cfg:ro]
+    r09:
+      kind: linux
+      #binds: [r09.cfg:/startup.cfg:ro]
+
+  links:
+    - endpoints: ["r00:FH0_0_0_0", "r02:FH0_0_0_4"]
+    - endpoints: ["r00:FH0_0_0_1", "r03:FH0_0_0_4"]
+    - endpoints: ["r00:FH0_0_0_2", "r04:FH0_0_0_4"]
+    - endpoints: ["r00:FH0_0_0_3", "r05:FH0_0_0_4"]
+
+    - endpoints: ["r01:FH0_0_0_0", "r02:FH0_0_0_5"]
+    - endpoints: ["r01:FH0_0_0_1", "r03:FH0_0_0_5"]
+    - endpoints: ["r01:FH0_0_0_2", "r04:FH0_0_0_5"]
+    - endpoints: ["r01:FH0_0_0_3", "r05:FH0_0_0_5"]
+
+    - endpoints: ["r02:FH0_0_0_0", "r06:FH0_0_0_0"]
+    - endpoints: ["r02:FH0_0_0_1", "r07:FH0_0_0_0"]
+    - endpoints: ["r02:FH0_0_0_2", "r08:FH0_0_0_0"]
+    - endpoints: ["r02:FH0_0_0_3", "r09:FH0_0_0_0"]
+
+    - endpoints: ["r03:FH0_0_0_0", "r06:FH0_0_0_1"]
+    - endpoints: ["r03:FH0_0_0_1", "r07:FH0_0_0_1"]
+    - endpoints: ["r03:FH0_0_0_2", "r08:FH0_0_0_1"]
+    - endpoints: ["r03:FH0_0_0_3", "r09:FH0_0_0_1"]
+
+    - endpoints: ["r04:FH0_0_0_0", "r06:FH0_0_0_2"]
+    - endpoints: ["r04:FH0_0_0_1", "r07:FH0_0_0_2"]
+    - endpoints: ["r04:FH0_0_0_2", "r08:FH0_0_0_2"]
+    - endpoints: ["r04:FH0_0_0_3", "r09:FH0_0_0_2"]
+
+    - endpoints: ["r05:FH0_0_0_0", "r06:FH0_0_0_3"]
+    - endpoints: ["r05:FH0_0_0_1", "r07:FH0_0_0_3"]
+    - endpoints: ["r05:FH0_0_0_2", "r08:FH0_0_0_3"]
+    - endpoints: ["r05:FH0_0_0_3", "r09:FH0_0_0_3"]
