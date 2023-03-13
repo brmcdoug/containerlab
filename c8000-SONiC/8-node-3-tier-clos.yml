@@ -1,0 +1,53 @@
+name: c8201-10-node-SONiC-clos
+
+topology:
+  kinds:
+    linux:
+      image: c8000-clab-sonic:19
+      binds: 
+          - /opt/images:/images
+      env:
+          IMAGE: /images/sonic-cisco-8000.bin
+          PID: '8101-32H'
+
+  nodes:
+    r1:
+      kind: linux
+    r2:
+      kind: linux
+   
+    r3:
+      kind: linux
+    r4:
+      kind: linux
+
+    r5:
+      kind: linux
+
+    r6:
+      kind: linux
+    r7:
+      kind: linux
+    r8:
+      kind: linux
+
+  links:
+    - endpoints: ["r1:eth1", "r3:eth5"]
+    - endpoints: ["r1:eth2", "r4:eth5"]
+    - endpoints: ["r1:eth3", "r5:eth5"]
+
+    - endpoints: ["r2:eth1", "r3:eth6"]
+    - endpoints: ["r2:eth2", "r4:eth6"]
+    - endpoints: ["r2:eth3", "r5:eth6"]
+
+    - endpoints: ["r3:eth1", "r6:eth1"]
+    - endpoints: ["r3:eth2", "r7:eth1"]
+    - endpoints: ["r3:eth3", "r8:eth1"]
+
+    - endpoints: ["r4:eth1", "r6:eth2"]
+    - endpoints: ["r4:eth2", "r7:eth2"]
+    - endpoints: ["r4:eth3", "r8:eth2"]
+
+    - endpoints: ["r5:eth1", "r6:eth3"]
+    - endpoints: ["r5:eth2", "r7:eth3"]
+    - endpoints: ["r5:eth3", "r8:eth3"]
