@@ -13,16 +13,20 @@ ovs-vsctl --version
 ```
 sysctl -w kernel.pid_max=1048575
 ```
+- can also simply edit /etc/sysctl.conf and append kernel.pid_max=1048575 to the end of the file, then apply the new setting via:
+```
+sudo sysctl -p
+```
 - make sure KVM modules are installed and configured
   file /dev/kvm (the output should be /dev/kvm: character special)
 
 - cpu and memory: recommend 20GB and 4 cores per router
 
-2. Install 8000 docker image
+1. Install 8000 docker image
 ```
 docker load -i 8201clab:7.5.3.tar.gz
 ```
-3. Create a topology file, example: [c8201-b2b.yml](c8201-b2b.yml)
+1. Create a topology file, example: [c8201-b2b.yml](c8201-b2b.yml)
 
 
 #### NOTE: Data interfaces naming convention 

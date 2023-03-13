@@ -31,7 +31,7 @@ topology:
       #binds: [r05.cfg:/startup.cfg:ro]
     r06:
       kind: linux
-      binds: [r06.cfg:/startup.cfg:ro]
+      #binds: [r06.cfg:/startup.cfg:ro]
     r07:
       kind: linux
       #binds: [r07.cfg:/startup.cfg:ro]
