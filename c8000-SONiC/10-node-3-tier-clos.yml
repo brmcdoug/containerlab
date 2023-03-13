@@ -13,39 +13,26 @@ topology:
   nodes:
     r00:
       kind: linux
-      #binds: [r00.cfg:/startup.cfg:ro]
     r01:
       kind: linux
-      #binds: [r01.cfg:/startup.cfg:ro]
     r02:
       kind: linux
-      #binds: [r02.cfg:/startup.cfg:ro]
     r03:
       kind: linux
-      #binds: [r03.cfg:/startup.cfg:ro]
     r04:
       kind: linux
-      #binds: [r04.cfg:/startup.cfg:ro]
     r05:
       kind: linux
-      #binds: [r05.cfg:/startup.cfg:ro]
     r06:
       kind: linux
-      #binds: [r06.cfg:/startup.cfg:ro]
     r07:
       kind: linux
-      #binds: [r07.cfg:/startup.cfg:ro]
     r08:
       kind: linux
-      #binds: [r08.cfg:/startup.cfg:ro]
     r09:
       kind: linux
-      #binds: [r09.cfg:/startup.cfg:ro]
 
   links:
-    - endpoints: ["r1:eth1", "r2:eth1"]
-    - endpoints: ["r1:eth2", "r2:eth2"]
-
     - endpoints: ["r00:eth1", "r02:eth5"]
     - endpoints: ["r00:eth2", "r03:eth5"]
     - endpoints: ["r00:eth3", "r04:eth5"]

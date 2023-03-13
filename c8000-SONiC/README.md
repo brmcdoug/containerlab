@@ -84,7 +84,7 @@ Router up
 
 7. Test ssh to XR (use cisco/cisco123 login credentials)
 ```
-containerlab inspect -t example.yml |grep r1
+sudo containerlab inspect -t example.yml |grep r1
 ```
 ```
 | 1 | clab-sonic-r1 | 1edc2ce54d66 | c8000-clab-sonic:16 | linux | running | 172.20.20.3/24 | 2001:172:20:20::2/64 |
@@ -105,6 +105,10 @@ You are on
 
 Last login: Tue Feb 21 19:56:42 2023 from 172.20.20.1
 cisco@sonic:~$ 
+```
+8. Destroy topology
+```
+sudo containerlab destroy -t example.yml 
 ```
 
 ### SONIC serial console access
