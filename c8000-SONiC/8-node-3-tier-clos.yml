@@ -13,23 +13,52 @@ topology:
   nodes:
     r1:
       kind: linux
+
     r2:
       kind: linux
-   
+
     r3:
       kind: linux
+      wait-for:
+        - r1
+        - r2
     r4:
       kind: linux
-
+      wait-for:
+        - r1
+        - r2
     r5:
       kind: linux
-
+      wait-for:
+        - r1
+        - r2
+        - r3
+        - r4
     r6:
       kind: linux
+      wait-for:
+        - r1
+        - r2
+        - r3
+        - r4
     r7:
       kind: linux
+      wait-for:
+        - r1
+        - r2
+        - r3
+        - r4
+        - r5
+        - r6
     r8:
       kind: linux
+      wait-for:
+        - r1
+        - r2
+        - r3
+        - r4
+        - r5
+        - r6
 
   links:
     - endpoints: ["r1:eth1", "r3:eth5"]
