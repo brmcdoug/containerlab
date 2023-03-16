@@ -16,12 +16,17 @@ Installing and running Cisco 8000 SONIC Containerlab docker image
 
    - cpu and memory: recommend 20GB and 4 cores per router
 
-2. Install 8000 SONIC docker image
+2. Install Containerlab:
+```
+https://containerlab.dev/install/
+```
+
+3. Install 8000 SONIC docker image
 ```   
 docker load < c8000-clab-sonic:19.tar.gz
 ```
 
-3. Copy sonic-cisco-8000.bin image to local storage (e.g. /sonic_images). Example:
+1. Copy sonic-cisco-8000.bin image to local storage (e.g. /sonic_images). Example:
 ```
 ls /opt/images/ | grep sonic
 

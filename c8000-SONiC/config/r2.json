@@ -1,0 +1,28 @@
+{
+    "DEVICE_METADATA": {
+        "localhost": {
+            "bgp_asn": "65002", 
+            "deployment_id": "1", 
+            "hostname": "r2", 
+            "type": "ToR"
+        }
+    }, 
+    "LOOPBACK_INTERFACE": {
+        "Loopback0|10.0.0.2/32": {},
+        "Loopback0|FC00:0000:2::1/128": {}
+    },
+    "INTERFACE": {
+        "Ethernet0|10.1.1.0/31": {},
+        "Ethernet4|10.1.1.2/31": {},
+        "Ethernet8|10.1.1.4/31": {},
+	    "Ethernet12|10.1.1.6/31": {}
+    },
+    "BGP_PEER_RANGE": {
+        "Leafs": {
+            "name": "Leafs",
+            "ip_range": [
+                "10.1.1.0/24"
+            ]
+        }
+    }
+}
