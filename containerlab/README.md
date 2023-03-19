@@ -46,7 +46,8 @@ Hu0_0_0_[0..N] ->  100G interfaces
 5. Create config files. Examples: [R01](r01.cfg) and [R02](r02.cfg)
 
 6. Deploy topology
-   - Note: the following example deploys a pair of back-to-back c8201 routers. There is also an example 4-node topology here: 
+   - Note: the following example deploys a pair of back-to-back c8201 routers. There is also an example 4-node topology [here](https://github.com/brmcdoug/vxr8000/tree/main/containerlab/4-node) 
+ - 
 ```
 sudo containerlab deploy -t c8201-b2b.yml
 ```
