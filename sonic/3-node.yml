@@ -5,7 +5,7 @@ topology:
     linux:
       image: 8000:7.8
       binds: 
-          - /opt/images:/images
+          - /home/cisco/images/8000-eft7.8/packages/images/8000/sonic/:/images
       env:
           IMAGE: /home/cisco/images/8000-eft7.8/packages/images/8000/sonic/sonic-cisco-8000.bin
           PID: '8101-32H'
