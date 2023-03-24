@@ -1,13 +1,13 @@
-name: c8201-3-node-SONiC-net
+name: c8201-3-node-SONiC-clos
 
 topology:
   kinds:
     linux:
-      image: 8000:7.8
+      image: c8000-clab-sonic:19
       binds: 
-          - /home/cisco/images/8000-eft7.8/packages/images/8000/sonic/:/images
+          - /opt/images:/images
       env:
-          IMAGE: /home/cisco/images/8000-eft7.8/packages/images/8000/sonic/sonic-cisco-8000.bin
+          IMAGE: /images/sonic-vs-srv6.bin
           PID: '8101-32H'
 
   nodes:
@@ -19,6 +19,9 @@ topology:
 
     r3:
       kind: linux
+      wait-for:
+        - r1
+        - r2
 
   links:
     - endpoints: ["r1:eth1", "r2:eth1"]
