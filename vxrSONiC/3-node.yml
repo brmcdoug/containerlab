@@ -1,4 +1,4 @@
-name: c8201-3-node-SONiC-clos
+name: c8201-sonic-3-node
 
 topology:
   kinds:
@@ -8,7 +8,7 @@ topology:
           - /opt/images:/images
       env:
           IMAGE: /images/sonic-vs-srv6.bin
-          PID: '8101-32H'
+          PID: '8201-32H'
 
   nodes:
     r1:
