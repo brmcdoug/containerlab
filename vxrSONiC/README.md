@@ -7,6 +7,9 @@ Installing and running Cisco 8000 SONIC Containerlab docker image
 
    - verify that Open vSwitch is installed
      ovs-vsctl --version
+```
+sudo apt-get install openvswitch-switch qemu qemu-kvm libvirt-bin -y
+```
 
    - limit /proc/sys/kernel/pid_max to 1048575
      sysctl -w kernel.pid_max=1048575
@@ -21,9 +24,9 @@ Installing and running Cisco 8000 SONIC Containerlab docker image
 https://containerlab.dev/install/
 ```
 
-3. Install 8000 SONIC docker image
+1. Install 8000 SONIC docker image
 ```   
-docker load < c8000-clab-sonic:19.tar.gz
+docker load -i c8000-clab-sonic:19.tar.gz
 ```
 
 1. Copy sonic-cisco-8000.bin image to local storage (e.g. /sonic_images). Example:
@@ -74,13 +77,31 @@ eth2 -> second front panel port (Ethernet4 or Ethernet8)
 ```
 sudo containerlab deploy -t example.yml
 ```
+ - example output:
+```
+cisco@vsonic:~/containerlab/vxrSONiC$ sudo containerlab deploy -t example.yml 
+INFO[0000] Containerlab v0.38.0 started                 
+INFO[0000] Parsing & checking topology file: example.yml 
+INFO[0000] Creating lab directory: /home/cisco/containerlab/vxrSONiC/clab-c8201-sonic-3-node 
+INFO[0000] Creating docker network: Name="clab", IPv4Subnet="172.20.20.0/24", IPv6Subnet="2001:172:20:20::/64", MTU="1500" 
+INFO[0000] Creating container: "r1"                     
+INFO[0000] Creating container: "r2"                     
+INFO[0002] Creating virtual wire: r1:eth1 <--> r2:eth1  
+INFO[0004] Adding containerlab host entries to /etc/hosts file 
++---+----------------------------+--------------+---------------------+-------+---------+----------------+----------------------+
+| # |            Name            | Container ID |        Image        | Kind  |  State  |  IPv4 Address  |     IPv6 Address     |
++---+----------------------------+--------------+---------------------+-------+---------+----------------+----------------------+
+| 1 | clab-c8201-sonic-r1 | ca825396c86e | c8000-clab-sonic:19 | linux | running | 172.20.20.2/24 | 2001:172:20:20::2/64 |
+| 2 | clab-c8201-sonic-r2 | bbda110e7e8f | c8000-clab-sonic:19 | linux | running | 172.20.20.3/24 | 2001:172:20:20::3/64 |
++---+----------------------------+--------------+---------------------+-------+---------+----------------+----------------------+
+```
    - NOTE: it may 10 or more minutes for SONIC to come up
 
 6. Monitor sonic device bringup
 ```
 docker logs -f clab-sonic-r1 
 ```
-   - After a while, you should see:
+   - After a while, you should see this at the end of the log:
 ```
 19:55:56 INFO Sim up
 Router up

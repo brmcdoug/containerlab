@@ -8,7 +8,7 @@ topology:
           - /opt/images:/images
       env:
           IMAGE: /images/sonic-vs-srv6.bin
-          PID: '8201-32H'
+          PID: '8201-32FH'
 
   nodes:
     r1:

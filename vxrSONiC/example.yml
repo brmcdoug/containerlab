@@ -8,7 +8,7 @@ topology:
             - /opt/images:/images
         env:
             IMAGE: /images/sonic-cisco-8000.bin
-            PID: '8201-32H'
+            PID: '8101-32H'
   nodes:
     r1:
       kind: linux
