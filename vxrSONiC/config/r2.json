@@ -5,7 +5,14 @@
             "deployment_id": "1", 
             "hostname": "r2", 
             "type": "ToR",
-            "docker_routing_config_mode": "split"
+            "docker_routing_config_mode": "split",
+            "buffer_model": "traditional",
+            "default_bgp_status": "up",
+            "default_pfcwd_status": "disable",
+            "hwsku": "32x100Gb",
+            "mac": "78:24:F0:96:9A:00",
+            "platform": "x86_64-8101_32h_o-r0",
+            "synchronous_mode": "enable"
         }
     }, 
     "LOOPBACK_INTERFACE": {
@@ -15,12 +22,8 @@
     "INTERFACE": {
         "Ethernet0|10.1.1.1/31": {},
         "Ethernet0|fc00:0::1/127": {},
-        "Ethernet4|10.1.1.8/31": {},
-        "Ethernet4|fc00:0::8/127": {},
-        "Ethernet8|10.1.1.10/31": {},
-        "Ethernet8|fc00:0::10/127": {},
-	    "Ethernet12|10.1.1.12/31": {},
-        "Ethernet12|fc00:0::12/127": {}
+        "Ethernet4|10.1.1.4/31": {},
+        "Ethernet4|fc00:0::4/127": {}
     },
 
     "BGP_NEIGHBOR": {
@@ -33,7 +36,7 @@
         },
         "10.1.1.9": {
             "name": "r3", 
-            "local_addr": "10.1.1.8", 
+            "local_addr": "10.1.1.5", 
             "asn": 65003,
             "rrclient": "0", 
             "nhopself": "1"
@@ -47,7 +50,7 @@
         },
         "fc00:0::9": {
             "name": "r3v6", 
-            "local_addr": "fc00:0::8", 
+            "local_addr": "fc00:0::5", 
             "asn": 65003,
             "rrclient": "0", 
             "nhopself": "1"
