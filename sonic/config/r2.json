@@ -14,6 +14,11 @@
             "platform": "x86_64-8101_32h_o-r0",
             "synchronous_mode": "enable"
         }
+    },
+    "MGMT_INTERFACE": {
+        "eth0|172.20.20.2/24": {
+            "gwaddr": "172.20.20.1"
+        }
     }, 
     "LOOPBACK_INTERFACE": {
         "Loopback0|10.0.0.2/32": {},
@@ -34,9 +39,9 @@
             "rrclient": "0", 
             "nhopself": "1"
         },
-        "10.1.1.9": {
+        "10.1.1.5": {
             "name": "r3", 
-            "local_addr": "10.1.1.5", 
+            "local_addr": "10.1.1.4", 
             "asn": 65003,
             "rrclient": "0", 
             "nhopself": "1"
@@ -48,9 +53,9 @@
             "rrclient": "0", 
             "nhopself": "1"
         },
-        "fc00:0::9": {
+        "fc00:0::5": {
             "name": "r3v6", 
-            "local_addr": "fc00:0::5", 
+            "local_addr": "fc00:0::4", 
             "asn": 65003,
             "rrclient": "0", 
             "nhopself": "1"
