@@ -1,7 +1,11 @@
-Installing and running Cisco 8000 SONIC Containerlab docker image
+### Cisco vxr8000 running SONiC
+
+Installation instructions
 =================================================================
 
-#### Many thanks to Rafal Skorka for providing the 8000 image and original instructions
+#### Many thanks to Rafal Skorka for providing the original instructions
+
+Note (July 21, 2023): SRv6 uSID support on SONiC vxr8000 is pending further development
 
 1. Host server requirements
 
@@ -24,22 +28,22 @@ sudo apt-get install openvswitch-switch qemu qemu-kvm libvirt-bin -y
 https://containerlab.dev/install/
 ```
 
-1. Install 8000 SONIC docker image
+3. Install 8000 SONiC docker image
 ```   
-docker load -i c8000-clab-sonic:19.tar.gz
+docker load -i c8000-clab-sonic:27.tar.gz
 ```
 
-1. Copy sonic-cisco-8000.bin image to local storage (e.g. /sonic_images). Example:
+4. Copy sonic-cisco-8000.bin image to local storage (e.g. /sonic_images). Example:
 ```
 ls /opt/images/ | grep sonic
 
-c8000-clab-sonic:19.tar.gz
+c8000-clab-sonic:27.tar.gz
 sonic-cisco-8000.bin
 sonic-README
 sonic.tar
 ```
 
-4. Create a simple SONIC back-to-back clab topology file
+5. Create a simple SONiC back-to-back clab topology file
 
     - NOTE: we will be using 'linux' ContainerLab kind to boot sonic images
 
@@ -50,12 +54,12 @@ name: sonic
 topology:
   kinds:
     linux:
-        image: c8000-clab-sonic:19
+        image: c8000-clab-sonic:27
         binds: 
             - /opt/images:/images
         env:
             IMAGE: /images/sonic-cisco-8000.bin
-            PID: '8101-32H'
+            PID: '8201-32FH'
   nodes:
     r1:
       kind: linux
@@ -73,7 +77,17 @@ eth1 -> first front panel port  (Ethernet0)
 eth2 -> second front panel port (Ethernet4 or Ethernet8)
 ```
 
-5. Deploy topology
+#### NOTE: all X-node.yml topology files in this repo use Linux bridge to connect the clab routers. Be sure to create linux bridge instances prior to deploying the X-node.yml topologies:
+
+```
+sudo brctl addbr br1
+sudo brctl addbr br2
+sudo ip link set br1 up
+sudo ip link set br2 up
+etc.
+```
+
+6. Deploy topology
 ```
 sudo containerlab deploy -t example.yml
 ```
@@ -91,13 +105,13 @@ INFO[0004] Adding containerlab host entries to /etc/hosts file
 +---+----------------------------+--------------+---------------------+-------+---------+----------------+----------------------+
 | # |            Name            | Container ID |        Image        | Kind  |  State  |  IPv4 Address  |     IPv6 Address     |
 +---+----------------------------+--------------+---------------------+-------+---------+----------------+----------------------+
-| 1 | clab-c8201-sonic-r1 | ca825396c86e | c8000-clab-sonic:19 | linux | running | 172.20.20.2/24 | 2001:172:20:20::2/64 |
-| 2 | clab-c8201-sonic-r2 | bbda110e7e8f | c8000-clab-sonic:19 | linux | running | 172.20.20.3/24 | 2001:172:20:20::3/64 |
+| 1 | clab-c8201-sonic-r1 | ca825396c86e | c8000-clab-sonic:27 | linux | running | 172.20.20.2/24 | 2001:172:20:20::2/64 |
+| 2 | clab-c8201-sonic-r2 | bbda110e7e8f | c8000-clab-sonic:27 | linux | running | 172.20.20.3/24 | 2001:172:20:20::3/64 |
 +---+----------------------------+--------------+---------------------+-------+---------+----------------+----------------------+
 ```
-   - NOTE: it may 10 or more minutes for SONIC to come up
+   - NOTE: it may 10 or more minutes for SONiC to come up
 
-6. Monitor sonic device bringup
+7. Monitor sonic device bringup
 ```
 docker logs -f clab-sonic-r1 
 ```
@@ -108,12 +122,12 @@ Router up
 ```
 #### If you don't see "Router up" after 10 minutes, please share the "docker logs ..." output with Cisco team.
 
-7. Test ssh to XR (use cisco/cisco123 login credentials)
+8. Test ssh to XR (either use SONiC default admin/YourPaSsWoRd or cisco/cisco123 login credentials)
 ```
 sudo containerlab inspect -t example.yml |grep r1
 ```
 ```
-| 1 | clab-sonic-r1 | 1edc2ce54d66 | c8000-clab-sonic:16 | linux | running | 172.20.20.3/24 | 2001:172:20:20::2/64 |
+| 1 | clab-sonic-r1 | 1edc2ce54d66 | c8000-clab-sonic:27 | linux | running | 172.20.20.3/24 | 2001:172:20:20::2/64 |
 ```
 ```
 ssh cisco@172.20.20.3
@@ -132,12 +146,12 @@ You are on
 Last login: Tue Feb 21 19:56:42 2023 from 172.20.20.1
 cisco@sonic:~$ 
 ```
-8. Destroy topology
+9. Destroy topology
 ```
 sudo containerlab destroy -t example.yml 
 ```
 
-### SONIC serial console access
+### SONiC serial console access
 
 1. Telnet to serial console (port 60000)
 ```
@@ -151,18 +165,25 @@ sonic login:
 ```
 ### Troubleshooting
 
-1. Invoke bash shell of the relevant docker instance
+1. check docker logs:
+```
+docker logs -f clab-sonic-r1
+```   
+
+2. Invoke bash shell of the relevant docker instance
 ```
 docker exec -ti clab-sonic-r1 bash
 root@r1:/#
 ```
-2. Check vxr simulation status (make sure it is in ‘running’ state)
+
+3. Check vxr simulation status (make sure it is in ‘running’ state)
 ```
 root@r1:/# cd /nobackup/
 root@r1:/nobackup# vxr.py status
 {"localhost": "running"}
 ```
-3. If simulation not in 'running' state, invoke sim-check command
+
+4. If simulation not in 'running' state, invoke sim-check command
 ```
 root@r1:/nobackup# vxr.py sim-check
 ```
